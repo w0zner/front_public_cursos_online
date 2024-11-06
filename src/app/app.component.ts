@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-declare function HOMEINIT([]): any
-declare var  $:any
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,8 +10,6 @@ export class AppComponent implements OnInit {
   title = 'public_cursos_online';
 
   ngOnInit(): void {
-    setTimeout(()=> {
-      HOMEINIT($)
-    }, 50)
+
   }
 }
