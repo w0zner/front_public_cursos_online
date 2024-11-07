@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, of } from 'rxjs';
-import { URL_SERVICIOS } from 'src/app/config/config';
+import { URL_FROTEND, URL_SERVICIOS } from 'src/app/config/config';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,12 @@ export class AuthService {
     )
   }
 
-  saveLocalStorage(auth: any){
+  register(data: any){
+    const URL = URL_SERVICIOS + "/users/register"
+    return this.http.post(URL, data)
+  }
+
+  private saveLocalStorage(auth: any){
     if(auth && auth.user.token) {
       localStorage.setItem("token", auth.user.token)
       localStorage.setItem("user", JSON.stringify(auth.user.user))
@@ -45,4 +50,14 @@ export class AuthService {
     return false
   }
 
+  logout() {
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    setTimeout(() => {
+      location.href = URL_FROTEND + '/auth/login'
+    }, 50);
+  }
+
 }
+
+

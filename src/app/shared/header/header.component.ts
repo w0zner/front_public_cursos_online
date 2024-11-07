@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/modules/auth/service/auth.service';
 
@@ -8,12 +8,18 @@ import { AuthService } from 'src/app/modules/auth/service/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   user: any= null
 
-  constructor(private authService: AuthService, public route: ActivatedRoute) {
+  constructor(private authService: AuthService, public route: ActivatedRoute) { }
+
+  ngOnInit(): void {
     this.user = this.authService.user
+  }
+
+  logout(){
+    this.authService.logout()
   }
 
 }
